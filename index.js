@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const connectDb = require("./config/db");
 
 const Projectroutes = require('./routes/project.route');
-const Contactroutes = require('./routes/contact.route')
+const Contactroutes = require('./routes/contact.route');
+const Authroutes = require('./routes/auth.route');
 
 dotenv.config({path:"./config/config.env"})
 
@@ -21,6 +22,7 @@ app.use(express.json())
 
 app.use('/api/projects',Projectroutes)
 app.use('/api/contact',Contactroutes)
+app.use('/api/auth',Authroutes)
 
 app.get('/',(req,res)=>{
     res.status(200).json("server is up and running")

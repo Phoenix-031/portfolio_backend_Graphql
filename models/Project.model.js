@@ -23,12 +23,18 @@ const projectSchema = mongoose.Schema({
 
     source:{
         type: String,
-        default:""
+        default:"https://github.com/Phoenix-031"
     },
 
     live:{
         type:String,
-        default:""
+        default:"https://github.com/Phoenix-031"
+    },
+
+    filter:{
+        type:Array,
+        default:["All"],
+        required:true
     }
 },{timestamps:true})
 

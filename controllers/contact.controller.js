@@ -23,4 +23,33 @@ const saveContact = async(req,res) =>{
     }
 }
 
-module.exports = saveContact
+const sendContacts = async(req,res) =>{
+    try {
+        const con = await Contact.find()
+
+        res.status(200).json({
+            success: true,
+            con
+        })
+    } catch (err) {
+        res.status(500).json({
+            success:false,
+            msg:"could not send contacts",
+        })
+        
+    }
+}
+
+const deleteContact = async(req,res) =>{
+    try {
+        
+    } catch (err) {
+        res.json({
+            success:false,
+            msg:"could not delete contact",
+        })
+        
+    }
+}
+
+module.exports = {saveContact,sendContacts,deleteContact}

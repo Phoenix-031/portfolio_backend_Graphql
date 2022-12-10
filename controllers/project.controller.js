@@ -1,8 +1,15 @@
 const Project = require('../models/Project.model')
 
 const addProject = async(req,res) =>{
+    console.log(req.body)
     try{
-        const proj = new Project(req.body)
+        const proj = new Project({
+            title:req.body.data.modaltitle,
+            description:req.body.data.modaldescription,
+            tags:req.body.data.modaltags,
+            live:req.body.data.live,
+            source:req.body.data.demo,
+        })
 
         const savedproj = await proj.save()
 
@@ -39,8 +46,11 @@ const getProjects = async (req,res) =>{
 
 const deleteProject = async (req,res) => {
     try{
-        const proj = await Project.findById(req.params.id)
+        const proj = await Project.findByIdAndRemove(req.params.id)
 
+        res.status(200).json({
+            success:true,
+        })
         
     }catch(err) {
         console.log(err)
@@ -50,4 +60,30 @@ const deleteProject = async (req,res) => {
         })
     }
 }
-module.exports = {addProject,getProjects,deleteProject}
+
+const updateProject = async (req,res) => {
+    console.log(req.body.data,req.params.projectId)
+    
+    try {
+
+        const proj = await Project.findByIdAndUpdate(req.params.projectId,{
+            title:req.body.data.modaltitle,
+            description:req.body.data.modaldescription,
+            tags:req.body.data.modaltags,
+            live:req.body.data.live,
+            source:req.body.data.demo,
+        })
+
+        res.status(200).json({
+            success: true,
+            proj
+        })
+    } catch (err) {
+        res.json({
+            success:false,
+            msg:"error updating project"
+        })
+        
+    }
+}
+module.exports = {addProject,getProjects,deleteProject,updateProject}
