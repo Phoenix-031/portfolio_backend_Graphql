@@ -5,14 +5,18 @@ const bcrypt = require('bcrypt')
 
 const loginAdmin = async(req,res) => {
 
+    console.log(req.body)
 
     try {
         const {password,email} = req.body.data
+        console.log(password,email)
 
         const Adm =await User.findOne({email})
+        console.log(Adm)
      
         if(Adm) {
-            const auth = await bcrypt.compare(password,Adm.password)
+            const auth = await bcrypt.compare(password,Adm.password) 
+            console.log(auth)
             if(auth){
                 sendLoginToken(Adm,200,res)
             }
@@ -97,7 +101,7 @@ const verifyUser = (req, res) => {
 }
 
 const sendLoginToken = (user, statusCode, res) => {
-	const accessToken = jwt.sign({ id: user._id,email: user.email }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
+	const accessToken = jwt.sign({ id: user._id,email: user.email,password:user.password,secret:user.secret }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
 	res.status(statusCode).json({
 		success: true,
 		accessToken,
