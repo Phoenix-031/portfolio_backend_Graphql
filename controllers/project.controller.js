@@ -86,4 +86,26 @@ const updateProject = async (req,res) => {
         
     }
 }
-module.exports = {addProject,getProjects,deleteProject,updateProject}
+
+const filterProject = async (req,res) => {
+
+    try {
+
+        const filterData = await Project.find({filter: {
+            $all: [req.params.id]
+        } })
+
+        res.status(200).json({
+            success:true,
+            data:filterData
+        })
+        
+    } catch (err) {
+        res.json({
+            success:false,
+            msg:"error filtering projects"
+        })
+        
+    }
+}
+module.exports = {addProject,getProjects,deleteProject,updateProject,filterProject}
