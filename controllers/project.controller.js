@@ -89,11 +89,15 @@ const updateProject = async (req,res) => {
 
 const filterProject = async (req,res) => {
 
+    console.log(req.params.id)
+
     try {
 
         const filterData = await Project.find({filter: {
             $all: [req.params.id]
         } })
+
+        console.log(filterData)
 
         res.status(200).json({
             success:true,
