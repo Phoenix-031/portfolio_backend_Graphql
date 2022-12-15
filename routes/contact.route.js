@@ -7,6 +7,6 @@ const { verifyAdmin } = require('../middlewares/admin.middlware');
 
 router.post('/',saveContact);
 router.get('/',verifyAdmin,sendContacts);
-router.delete(':contactId',deleteContact);
+router.delete('/:contactId',deleteContact);
 
 module.exports = router;

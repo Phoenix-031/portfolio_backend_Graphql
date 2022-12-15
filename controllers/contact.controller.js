@@ -43,6 +43,12 @@ const sendContacts = async(req,res) =>{
 const deleteContact = async(req,res) =>{
     try {
         
+        console.log(req.params)
+        const delcont = await Contact.findByIdAndDelete(req.params.contactId);
+
+        res.status(200).json({
+            succes:true
+        })
     } catch (err) {
         res.json({
             success:false,
