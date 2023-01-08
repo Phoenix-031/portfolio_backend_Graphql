@@ -54,12 +54,17 @@ const loginAdmin = () => ({
             const adm = await User.findOne({email : args.email})      
 
             if(adm) {
-                console.log(adm)
-                const auth = bcrypt.compare(adm.password,args.password)
-                if(auth) 
-                return {
-                    accessToken:sendLoginToken(adm),
-                    success:true
+                const auth =await bcrypt.compare(args.password, adm.password)
+                if(auth) {
+                    return {
+                        accessToken:sendLoginToken(adm),
+                        success:true
+                    }
+                } else {
+                    return {
+                        accessToken:"",
+                        success:false
+                    }
                 }
             }
             
@@ -75,6 +80,7 @@ const verifyAdmin = () => ({
     args: {token : {type:GraphQLString}},
     resolve: (parent, args) => {
         const verfiyAdmin = jwt.verify(args.token,process.env.JWT_SECRET)
+        console.log(args)
 
         if(verfiyAdmin) {
             const eml = jwt.decode(args.token,process.env.JWT_SECRET)

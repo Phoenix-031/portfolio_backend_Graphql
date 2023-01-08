@@ -10,12 +10,12 @@ const addProject = () => ({
     args:{
         title:{type:GraphQLNonNull(GraphQLString)},
         description: {type:GraphQLNonNull(GraphQLString)},
-        tags: {type:GraphQLNonNull(GraphQLList(GraphQLString))},
+        tags: {type:GraphQLList(GraphQLString)},
         source: {type:GraphQLString},
         live: {type:GraphQLString},
-        imgurl:{type : GraphQLString},
     },
     resolve :async(parent,args) => {
+        console.log(args)
         try {
             const newProj = new Project(args);
             const p = await newProj.save();
@@ -62,7 +62,6 @@ const updateProject = () => ({
                 title: args.title,
                 description: args.description,
                 tags: args.tags,
-                imgurl: args.imgurl,
                 source: args.source,
                 live: args.live,
             })

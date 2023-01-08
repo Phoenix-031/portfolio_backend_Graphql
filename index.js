@@ -26,9 +26,9 @@ app.use('/graphql',graphqlHTTP({
     graphiql:process.env.NODE_ENV === 'production'
 }))
 
-app.use('/api/projects',Projectroutes)
-app.use('/api/contact',Contactroutes)
-app.use('/api/auth',Authroutes)
+// app.use('/api/projects',Projectroutes)
+// app.use('/api/contact',Contactroutes)
+// app.use('/api/auth',Authroutes)
 
 app.get('/',(req,res)=>{
     res.status(200).json("server is up and running")

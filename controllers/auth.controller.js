@@ -12,7 +12,7 @@ const loginAdmin = async(req,res) => {
         console.log(password,email)
 
         const Adm =await User.findOne({email})
-        console.log(Adm)
+        // console.log(Adm)
      
         if(Adm) {
             const auth = await bcrypt.compare(password,Adm.password) 
