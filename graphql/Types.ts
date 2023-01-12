@@ -51,5 +51,4 @@ const ResponseType = new GraphQLObjectType({
         success:{type : GraphQLBoolean},
     })
 })
-
-module.exports = {ProjectType,ContactType,AuthType,ResponseType}
+export {ProjectType,ContactType,AuthType,ResponseType}

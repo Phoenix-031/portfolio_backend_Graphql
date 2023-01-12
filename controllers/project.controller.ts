@@ -1,6 +1,8 @@
+import { Request, Response } from "express"
+
 const Project = require('../models/Project.model')
 
-const addProject = async(req,res) =>{
+const addProject = async(req : Request,res : Response) =>{
     console.log(req.body)
     try{
         const proj = new Project({
@@ -25,7 +27,7 @@ const addProject = async(req,res) =>{
     }
 }
 
-const getProjects = async (req,res) =>{
+const getProjects = async (req : Request,res : Response) =>{
     try{
         const projlst = await Project.find()
 
@@ -44,7 +46,7 @@ const getProjects = async (req,res) =>{
 }
 
 
-const deleteProject = async (req,res) => {
+const deleteProject = async (req : Request,res : Response) => {
     try{
         const proj = await Project.findByIdAndRemove(req.params.id)
 
@@ -61,7 +63,7 @@ const deleteProject = async (req,res) => {
     }
 }
 
-const updateProject = async (req,res) => {
+const updateProject = async (req : Request,res : Response) => {
     console.log(req.body.data,req.params.projectId)
     
     try {
@@ -87,7 +89,7 @@ const updateProject = async (req,res) => {
     }
 }
 
-const filterProject = async (req,res) => {
+const filterProject = async (req : Request,res : Response) => {
 
     console.log(req.params.id)
 
@@ -112,4 +114,4 @@ const filterProject = async (req,res) => {
         
     }
 }
-module.exports = {addProject,getProjects,deleteProject,updateProject,filterProject}
+export {addProject,getProjects,deleteProject,updateProject,filterProject}

@@ -1,6 +1,6 @@
 const {GraphQLObjectType,GraphQLSchema} = require("graphql")
-const {deleteMessage, deleteProject, updateProject, addProject,saveContact} = require("../graphql/Mutations")
-const {getAllProjects, getMessages, filterProjects, loginAdmin,verifyAdmin} = require("../graphql/Query")
+import {deleteMessage, deleteProject, updateProject, addProject,saveContact} from  "../graphql/Mutations"
+import {getAllProjects, getMessages, filterProjects, loginAdmin,veriAdmin} from  "../graphql/Query"
 
 const Mutations = new GraphQLObjectType({
     name:"Mutation",
@@ -20,7 +20,7 @@ const RootQuery = new GraphQLObjectType({
         getMessages: getMessages(),
         filterProjects: filterProjects(),
         loginAdmin: loginAdmin(),
-        verifyAdmin: verifyAdmin()
+        verifyAdmin: veriAdmin()
     }
 })
 

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import { Schema,model } from "mongoose"
 
-const projectSchema = mongoose.Schema({
+const projectSchema = new Schema({
     title:{
         type: String,
         required: true
@@ -39,5 +39,5 @@ const projectSchema = mongoose.Schema({
 },{timestamps:true})
 
 
-module.exports = mongoose.model("project",projectSchema);
+module.exports = model("project",projectSchema);
 

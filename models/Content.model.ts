@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import { Schema,model } from "mongoose"
 
-const ContentSchema = mongoose.Schema({
+const ContentSchema = new Schema({
     about:{
         type:String,
         required:true,
@@ -27,4 +27,4 @@ const ContentSchema = mongoose.Schema({
     
 },{timestamps:true})
 
-module.exports = mongoose.model(content,ContentSchema);
+module.exports = model('content',ContentSchema);

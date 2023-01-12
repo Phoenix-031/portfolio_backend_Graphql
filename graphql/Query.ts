@@ -1,3 +1,6 @@
+import { z } from "zod"
+import { UserModelType } from "../Types/Zod.types"
+
 const { GraphQLList, GraphQLString } = require("graphql")
 const {ProjectType,ContactType,AuthType} = require("./Types")
 const Project = require("../models/Project.model")
@@ -6,21 +9,21 @@ const Contact = require("../models/Contact.model")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
-const sendLoginToken = (user) => {
+const sendLoginToken = (user : z.infer<typeof UserModelType>) => {
 	const accessToken = jwt.sign({ id: user._id,email: user.email,password:user.password,secret:user.secret}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
     return accessToken
 };
 
 const getAllProjects = () => ({
     type:GraphQLList(ProjectType),
-    resolve: (parent,args) => {
+    resolve: (parent : any,args : any) => {
         return Project.find()
     }
 })
 
 const getMessages = () => ({
     type:GraphQLList(ContactType),
-    resolve: (parent, args) => {
+    resolve: (parent : any, args : any) => {
         return Contact.find()
     }
 })
@@ -28,7 +31,7 @@ const getMessages = () => ({
 const filterProjects = () => ({
     type: GraphQLList(ProjectType),
     args : {id : {type: GraphQLString}},
-    resolve: async(parent, args) => {
+    resolve: async(parent : any, args : any) => {
         try {
             const filterData = await Project.find({filter: {
                 $all: [args.id]
@@ -36,7 +39,7 @@ const filterProjects = () => ({
 
             return filterData
             
-        } catch (err) {
+        } catch (err : any) {
             console.error(err.message)
             
         }
@@ -49,7 +52,7 @@ const loginAdmin = () => ({
         email: {type: GraphQLString},
         password: {type: GraphQLString}
     },
-    resolve: async(parent, args) => {
+    resolve: async(parent : any, args : any) => {
         try {
             const adm = await User.findOne({email : args.email})      
 
@@ -68,17 +71,17 @@ const loginAdmin = () => ({
                 }
             }
             
-        } catch (err) {
+        } catch (err : any) {
             console.log(err.message)
             
         }
     }
 })
 
-const verifyAdmin = () => ({
+const veriAdmin = () => ({
     type: AuthType,
     args: {token : {type:GraphQLString}},
-    resolve: (parent, args) => {
+    resolve: (parent : any, args : any) => {
         const verfiyAdmin = jwt.verify(args.token,process.env.JWT_SECRET)
         console.log(args)
 
@@ -99,4 +102,4 @@ const verifyAdmin = () => ({
 
 })
 
-module.exports = {getAllProjects, getMessages, filterProjects, loginAdmin,verifyAdmin}
+export {getAllProjects, getMessages, filterProjects, loginAdmin,veriAdmin}

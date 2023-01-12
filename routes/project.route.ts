@@ -1,5 +1,6 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
+
 const {getProjects,deleteProject,addProject, updateProject, filterProject} = require("../controllers/project.controller");
 
 //controllers

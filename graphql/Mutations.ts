@@ -1,12 +1,12 @@
 const { GraphQLString, GraphQLList, GraphQLNonNull, GraphQLIDa,GraphQLBoolean,GraphQLID } = require('graphql')
-const {UserType,ProjectType,ContactType,ResponseType} = require('../graphql/Types')
+import  {ProjectType,ContactType,ResponseType} from '../graphql/Types'
 const Project = require('../models/Project.model')
 const User = require('../models/User.model')
 const Contact = require("../models/Contact.model")
 const jwt = require("jsonwebtoken")
 
 
-const isAdmin = (token) => {
+const isAdmin = (token : string) => {
         const tk = jwt.verify(token,process.env.JWT_SECRET)
         // console.log( tk)
 
@@ -34,7 +34,7 @@ const addProject = () => ({
         live: {type:GraphQLString},
         token:{type: GraphQLNonNull(GraphQLString)},
     },
-    resolve :async(parent,args) => {
+    resolve :async(parent : any,args : any) => {
         console.log(args)
 
         try {
@@ -49,7 +49,7 @@ const addProject = () => ({
             else {
                 throw new Error("Request failed")
             }
-        }catch(err) {
+        }catch(err : any) {
             return{
                 message:err.message,
                 success: false
@@ -62,7 +62,7 @@ const addProject = () => ({
 const deleteProject = () => ({
     type:ResponseType,
     args:{id : {type:GraphQLID},token: {type:GraphQLNonNull(GraphQLString)}},
-    resolve : async(parent,args) => {
+    resolve : async(parent : any,args : any) => {
         // console.log(isAdmin(args.token))
         try {
             if(isAdmin(args.token)) {
@@ -97,7 +97,7 @@ const updateProject = () => ({
         filter:{type : GraphQLList(GraphQLString)},
         token:{type: GraphQLNonNull(GraphQLString)}
     },
-    resolve : async(parent,args) => {
+    resolve : async(parent : any,args : any) => {
         try {
             if(isAdmin(args.token)) {
                 const proj =await Project.findByIdAndUpdate(args.id, {
@@ -115,7 +115,7 @@ const updateProject = () => ({
             else {
                 throw new Error("Request failed")
             }
-        }catch(err) {
+        }catch(err : any) {
             return {
                 message:err.message,
                 success:false
@@ -128,7 +128,7 @@ const updateProject = () => ({
 const deleteMessage = () => ({
     type:ResponseType,
     args:{id : {type:GraphQLID},token:{type: GraphQLNonNull(GraphQLString)}},
-    resolve : async(parent,args) => {
+    resolve : async(parent : any,args:any) => {
         try {
             if(isAdmin(args.token)) {
                 const d = await Contact.findByIdAndDelete(args.id)
@@ -140,7 +140,7 @@ const deleteMessage = () => ({
                 throw new Error("Request failed")
             }
 
-        } catch (err) {
+        } catch (err : any) {
             return{
                 message:err.message,
                 success:false
@@ -157,16 +157,16 @@ const saveContact = () => ({
         subject: {type: GraphQLString},
         message: {type: GraphQLString}
     },
-    resolve : async(parent,args) => {
+    resolve : async(parent : any,args : any) => {
         try {
             const con = new Contact(args);
             const svcon =await con.save()
             return svcon
-        } catch (err) {
+        } catch (err : any) {
             console.log(err.message)
             
         }
     }
 })
 
-module.exports = {deleteMessage, deleteProject, updateProject, addProject,saveContact}
+export {deleteMessage, deleteProject, updateProject, addProject,saveContact}

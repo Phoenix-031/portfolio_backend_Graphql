@@ -1,15 +1,17 @@
 const User = require('../models/User.model')
 const jwt = require('jsonwebtoken')
-const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
+import { Request,Response } from "express"
+import { z } from "zod"
+import { UserModelType } from "../Types/Zod.types"
 
-const loginAdmin = async(req,res) => {
+const loginAdmin = async(req : Request,res :Response) => {
 
-    console.log(req.body)
+    // console.log(req.body)
 
     try {
         const {password,email} = req.body.data
-        console.log(password,email)
+        // console.log(password,email)
 
         const Adm =await User.findOne({email})
         // console.log(Adm)
@@ -35,7 +37,7 @@ const loginAdmin = async(req,res) => {
     }
 }
 
-const registerAdmin = async(req,res) => {
+const registerAdmin = async(req : Request,res : Response) => {
 
     try {
 
@@ -69,7 +71,7 @@ const registerAdmin = async(req,res) => {
     }
 }
 
-const verifyUser = (req, res) => {
+const verifyUser = (req :Request, res : Response) => {
 
     try {
         const {token} = req.headers
@@ -100,7 +102,7 @@ const verifyUser = (req, res) => {
     }
 }
 
-const sendLoginToken = (user, statusCode, res) => {
+const sendLoginToken = (user: z.infer<typeof UserModelType >, statusCode : number, res : Response) => {
 	const accessToken = jwt.sign({ id: user._id,email: user.email,password:user.password,secret:user.secret }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
 	res.status(statusCode).json({
 		success: true,
@@ -108,4 +110,4 @@ const sendLoginToken = (user, statusCode, res) => {
 	});
 };
 
-module.exports = {loginAdmin,registerAdmin,verifyUser}
+export {loginAdmin,registerAdmin,verifyUser}

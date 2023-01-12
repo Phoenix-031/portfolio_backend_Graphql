@@ -1,8 +1,9 @@
 const Contact = require('../models/Contact.model')
+import { Request,Response } from "express"
 
-const saveContact = async(req,res) =>{
+const saveContact = async(req : Request,res : Response) =>{
 
-    console.log(req.body)
+    // console.log(req.body)
     
     try{
 
@@ -23,7 +24,7 @@ const saveContact = async(req,res) =>{
     }
 }
 
-const sendContacts = async(req,res) =>{
+const sendContacts = async(req : Request,res : Response) =>{
     try {
         const con = await Contact.find()
 
@@ -40,10 +41,10 @@ const sendContacts = async(req,res) =>{
     }
 }
 
-const deleteContact = async(req,res) =>{
+const deleteContact = async(req : Request,res : Response) =>{
     try {
         
-        console.log(req.params)
+        // console.log(req.params)
         const delcont = await Contact.findByIdAndDelete(req.params.contactId);
 
         res.status(200).json({
@@ -58,4 +59,4 @@ const deleteContact = async(req,res) =>{
     }
 }
 
-module.exports = {saveContact,sendContacts,deleteContact}
+export {saveContact,sendContacts,deleteContact}

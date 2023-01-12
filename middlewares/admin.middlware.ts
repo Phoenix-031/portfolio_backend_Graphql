@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require("bcrypt");
-const Admin  = require('../models/User.model')
+import { NextFunction, Request, Response } from 'express';
+import  Admin  from '../models/User.model'
 
-const verifyAdmin = async(req,res,next) => {
+const verifyAdmin = async(req : Request,res : Response,next : NextFunction) => {
 
     try {
         const {token} = req.headers
@@ -17,7 +18,7 @@ const verifyAdmin = async(req,res,next) => {
 
                 const admusr = await Admin.findOne({email:adm.email})
 
-                if(adm.password === admusr.password) {
+                if(adm.password === admusr!.password) {
                     next()
                 } else {
                     res.json({

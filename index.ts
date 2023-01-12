@@ -1,8 +1,9 @@
-const express = require("express");
+// const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const {graphqlHTTP} = require("express-graphql");
-const connectDb = require("./db/db");
+import express, { Request, Response } from "express";
+import connectDb from "./db/db";
 
 // const Projectroutes = require('./routes/project.route');
 // const Contactroutes = require('./routes/contact.route');
@@ -30,7 +31,7 @@ app.use('/graphql',graphqlHTTP({
 // app.use('/api/contact',Contactroutes)
 // app.use('/api/auth',Authroutes)
 
-app.get('/',(req,res)=>{
+app.get('/',(req : Request,res : Response)=>{
     res.status(200).json("server is up and running")
 })
 

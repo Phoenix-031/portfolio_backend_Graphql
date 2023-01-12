@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
+
 const {saveContact,sendContacts,deleteContact} = require('../controllers/contact.controller');
 const { verifyAdmin } = require('../middlewares/admin.middlware');
 
