@@ -25,16 +25,16 @@ const ContactType = new GraphQLObjectType({
     })
 })
 
-const UserType = new GraphQLObjectType({
-    name:"User",
-    fields:() => ({
-        _id:{type:GraphQLID},
-        secret:{type:GraphQLString},
-        email:{type:GraphQLString},
-        password:{type:GraphQLString},
-    })
+// const UserType = new GraphQLObjectType({
+//     name:"User",
+//     fields:() => ({
+//         _id:{type:GraphQLID},
+//         secret:{type:GraphQLString},
+//         email:{type:GraphQLString},
+//         password:{type:GraphQLString},
+//     })
 
-})
+// })
 
 const AuthType = new GraphQLObjectType({
     name:"Auth",
@@ -44,4 +44,12 @@ const AuthType = new GraphQLObjectType({
     })
 })
 
-module.exports = {ProjectType,UserType,ContactType,AuthType}
+const ResponseType = new GraphQLObjectType({
+    name:"Response",
+    fields:() => ({
+        message:{type : GraphQLString},
+        success:{type : GraphQLBoolean},
+    })
+})
+
+module.exports = {ProjectType,ContactType,AuthType,ResponseType}

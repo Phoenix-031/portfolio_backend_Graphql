@@ -2,11 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const {graphqlHTTP} = require("express-graphql");
-const connectDb = require("./config/db");
+const connectDb = require("./db/db");
 
-const Projectroutes = require('./routes/project.route');
-const Contactroutes = require('./routes/contact.route');
-const Authroutes = require('./routes/auth.route');
+// const Projectroutes = require('./routes/project.route');
+// const Contactroutes = require('./routes/contact.route');
+// const Authroutes = require('./routes/auth.route');
 const schema = require("./schema/schema");
 
 dotenv.config({path:"./config/config.env"})
@@ -23,7 +23,7 @@ app.use(express.json())
 
 app.use('/graphql',graphqlHTTP({
     schema,
-    graphiql:process.env.NODE_ENV === 'production'
+    graphiql:true
 }))
 
 // app.use('/api/projects',Projectroutes)

@@ -1,5 +1,4 @@
-const {GraphQLObjectType,GraphQLSchema, graphqlSync} = require('graphql')
-const {UserType,ProjectType,ContactType} = require('../graphql/Types')
+const {GraphQLObjectType,GraphQLSchema} = require("graphql")
 const {deleteMessage, deleteProject, updateProject, addProject,saveContact} = require("../graphql/Mutations")
 const {getAllProjects, getMessages, filterProjects, loginAdmin,verifyAdmin} = require("../graphql/Query")
 
@@ -15,7 +14,7 @@ const Mutations = new GraphQLObjectType({
 })
 
 const RootQuery = new GraphQLObjectType({
-    name:"RootQueryType",
+    name:"RootQuery",
     fields:{
         getAllProjects: getAllProjects(),
         getMessages: getMessages(),

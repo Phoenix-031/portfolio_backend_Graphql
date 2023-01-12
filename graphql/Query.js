@@ -1,13 +1,13 @@
-const { GraphQLList, GraphQLString,Graphql, GraphQLObjectType } = require('graphql')
-const {UserType,ProjectType,ContactType,AuthType} = require('../graphql/Types')
-const Project = require('../models/Project.model')
-const User = require('../models/User.model')
+const { GraphQLList, GraphQLString } = require("graphql")
+const {ProjectType,ContactType,AuthType} = require("./Types")
+const Project = require("../models/Project.model")
+const User = require("../models/User.model")
 const Contact = require("../models/Contact.model")
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
 const sendLoginToken = (user) => {
-	const accessToken = jwt.sign({ id: user._id,email: user.email,password:user.password,secret:user.secret }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
+	const accessToken = jwt.sign({ id: user._id,email: user.email,password:user.password,secret:user.secret}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_LOGIN_EXPIRE });
     return accessToken
 };
 
@@ -37,7 +37,7 @@ const filterProjects = () => ({
             return filterData
             
         } catch (err) {
-            throw new Error(err.message)
+            console.error(err.message)
             
         }
     }
@@ -69,7 +69,7 @@ const loginAdmin = () => ({
             }
             
         } catch (err) {
-            throw new Error(err.message)
+            console.log(err.message)
             
         }
     }
@@ -88,12 +88,10 @@ const verifyAdmin = () => ({
             if(eml.email === 'pradhandebayan@gmail.com') {
                 return {
                     success:true,
-                    accessToken:args.token
                 }
             } else {
                 return {
                     success:false,
-                    accessToken:args.token
                 }
             }
         }
