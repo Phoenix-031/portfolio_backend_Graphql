@@ -24,7 +24,7 @@ app.use(express.json())
 
 app.use('/graphql',graphqlHTTP({
     schema,
-    graphiql:process.env.NODE_ENV === "production"
+    graphiql:process.env.NODE_ENV !== "production"
 }))
 
 // app.use('/api/projects',Projectroutes)
