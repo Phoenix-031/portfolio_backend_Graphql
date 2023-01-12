@@ -20,7 +20,7 @@ const RootQuery = new GraphQLObjectType({
         getMessages: getMessages(),
         filterProjects: filterProjects(),
         loginAdmin: loginAdmin(),
-        verifyAdmin: veriAdmin()
+        veriAdmin: veriAdmin()
     }
 })
 

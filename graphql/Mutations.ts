@@ -1,8 +1,8 @@
 const { GraphQLString, GraphQLList, GraphQLNonNull, GraphQLIDa,GraphQLBoolean,GraphQLID } = require('graphql')
 import  {ProjectType,ContactType,ResponseType} from '../graphql/Types'
-const Project = require('../models/Project.model')
-const User = require('../models/User.model')
-const Contact = require("../models/Contact.model")
+import Project from '../models/Project.model'
+// import User from '../models/User.model'
+import Contact from "../models/Contact.model"
 const jwt = require("jsonwebtoken")
 
 

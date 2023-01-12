@@ -22,4 +22,4 @@ const contactSchema =new Schema({
     }
 },{timestamps:true})
 
-module.exports = model("contact", contactSchema)
+export default model("contact", contactSchema)

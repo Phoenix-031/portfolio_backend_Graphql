@@ -3,9 +3,9 @@ import { UserModelType } from "../Types/Zod.types"
 
 const { GraphQLList, GraphQLString } = require("graphql")
 const {ProjectType,ContactType,AuthType} = require("./Types")
-const Project = require("../models/Project.model")
-const User = require("../models/User.model")
-const Contact = require("../models/Contact.model")
+import Project from "../models/Project.model"
+import User from "../models/User.model"
+import Contact from "../models/Contact.model"
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 

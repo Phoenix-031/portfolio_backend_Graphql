@@ -27,4 +27,4 @@ const ContentSchema = new Schema({
     
 },{timestamps:true})
 
-module.exports = model('content',ContentSchema);
+export default model('content',ContentSchema);
