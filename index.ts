@@ -2,8 +2,7 @@
 const cors = require("cors");
 const dotenv = require("dotenv");
 const {graphqlHTTP} = require("express-graphql");
-const express = require("express");
-import { Request, Response } from "express";
+import express, { Request, Response } from "express";
 import connectDb from "./db/db";
 
 // const Projectroutes = require('./routes/project.route');
