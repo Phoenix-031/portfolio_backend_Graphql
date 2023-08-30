@@ -25,7 +25,10 @@ app.use(express.json())
 app.use('/graphql',graphqlHTTP({
     schema,
     graphiql:process.env.NODE_ENV !== "production",
-    cors:false
+    cors:{
+        origin:"https://debayan031.netlify.app/",
+        credentials:true
+    }
 }))
 
 // app.use('/api/projects',Projectroutes)
