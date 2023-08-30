@@ -36,7 +36,9 @@ app.get('/',(req : Request,res : Response)=>{
 })
 
 
-const PORT = process.env.PORT || 8967;
-app.listen(PORT, () => {
-    console.log(`server started at: http://localhost:${PORT}`);
-})
+// const PORT = process.env.PORT || 8967;
+// app.listen(PORT, () => {
+//     console.log(`server started at: http://localhost:${PORT}`);
+// })
+
+module.exports = app;
