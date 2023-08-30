@@ -25,10 +25,10 @@ app.use(express.json())
 app.use('/graphql',graphqlHTTP({
     schema,
     graphiql:process.env.NODE_ENV !== "production",
-    cors:{
-        origin:"https://debayan031.netlify.app/",
-        credentials:true
-    }
+    // cors:{
+    //     origin:"https://debayan031.netlify.app/",
+    //     credentials:true
+    // }
 }))
 
 // app.use('/api/projects',Projectroutes)
@@ -45,4 +45,4 @@ app.get('/',(req : Request,res : Response)=>{
 //     console.log(`server started at: http://localhost:${PORT}`);
 // })
 
-module.exports = app;
+// module.exports = app;
